@@ -1,0 +1,48 @@
+<idea-plugin>
+    <id>com.rafgiav.separator-gen</id>
+    <name>Separator-Gen</name>
+    <version>0.1.0</version>
+    <vendor email="rafail.giavrimis@gmail.com" url="https://www.rafgiav.com">Rafail Giavrimis</vendor>
+
+    <description><![CDATA[
+      A simple plugin to generate fixed length horizontal separators.
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable parentId="tools"
+                                 instance="com.rafgiav.separator_gen.settings.ApplicationSettingsConfigurable"
+                                 id="com.rafgiav.separator_gen.settings.ApplicationSettingsConfigurable"
+                                 displayName="Separator-Gen"
+        />
+        <applicationService serviceImplementation="com.rafgiav.separator_gen.settings.ApplicationSettingsState"/>
+    </extensions>
+
+    <actions>
+        <group id="com.rafgiav.separator_gen.GroupedGeneratorActions" text="Separator-Gen" icon="com.rafgiav.separator_gen.icons.SeparatorPluginIcons.APP_ICON" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+        <action id="com.rafgiav.separator_gen.actions.SeparatorGeneratorAction"
+                class="com.rafgiav.separator_gen.actions.SeparatorGeneratorAction"
+                text="Generate Horizontal Separator"
+                description="Generates a horizontal separator based on the selected text.">
+            <add-to-group group-id="com.rafgiav.separator_gen.GroupedGeneratorActions" anchor="first"/>
+        </action>
+        <action id="com.rafgiav.separator_gen.actions.SeparatorRepairAction"
+                class="com.rafgiav.separator_gen.actions.SeparatorRepairAction"
+                text="Repair Separator Line"
+                description="Repairs a malformed horizontal separator based on the selected text.">
+            <add-to-group group-id="com.rafgiav.separator_gen.GroupedGeneratorActions" anchor="after"
+                          relative-to-action="com.rafgiav.separator_gen.actions.SeparatorGeneratorAction"/>
+        </action>
+
+        <action id="com.rafgiav.separator_gen.actions.ConfigureAppAction"
+                class="com.rafgiav.separator_gen.actions.ConfigureAppAction" text="Configure Separator-Gen"
+                description="Open settings panel for Separator-Gen">
+            <add-to-group group-id="com.rafgiav.separator_gen.GroupedGeneratorActions" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
