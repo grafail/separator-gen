@@ -41,7 +41,7 @@ public class ApplicationSettingsComponent {
     }
 
     public String getPreviewSeparator(){
-        if(SeparatorGenerator.isGenerationPossible(sampleTextField.getText(), getLineLength())){
+        if(SeparatorGenerator.isGenerationPossible(sampleTextField.getText(), getLineLength(), " ")){
             return SeparatorGenerator.generateHorizontalSeparator(sampleTextField.getText(), getInnerLineStyle(), null, getLineLength());
         }
         return null;

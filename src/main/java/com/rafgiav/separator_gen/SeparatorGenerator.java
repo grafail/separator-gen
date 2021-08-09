@@ -15,9 +15,9 @@ public class SeparatorGenerator {
 
   public static String generateHorizontalSeparator(
       String content, String innerLineStyle, Language lang, int lineLength) {
-    int availableLineSpace = lineLength - content.length() - 6;
     String commentChar = SeparatorGenerator.getCommentChars(lang);
     if (commentChar != null) {
+      int availableLineSpace = lineLength - content.length() - 4 - (2 * commentChar.length());
       return String.format(
           "%s %s %s %s %s",
           commentChar,
@@ -29,8 +29,8 @@ public class SeparatorGenerator {
     return null;
   }
 
-  public static boolean isGenerationPossible(String content, int lineLength) {
-    return !content.contains("\n") && content.length() + 6 <= lineLength;
+  public static boolean isGenerationPossible(String content, int lineLength, String commentChars) {
+    return !content.contains("\n") && content.length() + 4 + 2*commentChars.length() <= lineLength;
   }
 
   public static String repairSeparator(
@@ -48,7 +48,7 @@ public class SeparatorGenerator {
         Matcher matcher = sepRegex.matcher(content);
         if (matcher.find()) {
           String detectedContent = matcher.group("content");
-          if (SeparatorGenerator.isGenerationPossible(content, lineLength)) {
+          if (SeparatorGenerator.isGenerationPossible(detectedContent, lineLength, commentChars)) {
             return generateHorizontalSeparator(detectedContent, innerLineStyle, lang, lineLength);
           }
         }

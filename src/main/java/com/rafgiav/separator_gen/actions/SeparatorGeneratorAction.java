@@ -32,7 +32,7 @@ public class SeparatorGeneratorAction extends AnAction {
       String text;
       if (selectionModel.hasSelection()
           && (text = selectionModel.getSelectedText()) != null
-          && SeparatorGenerator.isGenerationPossible(text, lineLength)) {
+          && SeparatorGenerator.isGenerationPossible(text, lineLength, " ")) {
         String generatedSeparator =
             SeparatorGenerator.generateHorizontalSeparator(text, innerLineStyle, pf.getLanguage(), lineLength);
         if (generatedSeparator != null) {
@@ -68,7 +68,7 @@ public class SeparatorGeneratorAction extends AnAction {
         String text;
         if (selectionModel.hasSelection()
             && (text = selectionModel.getSelectedText()) != null
-            && SeparatorGenerator.isGenerationPossible(text, lineLength)) {
+            && SeparatorGenerator.isGenerationPossible(text, lineLength, " ")) {
           enabled = true;
         }
       }
