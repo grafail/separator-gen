@@ -63,7 +63,8 @@ public class SeparatorGenerator {
     }
     @NotNull List<Commenter> commenters = LanguageCommenters.INSTANCE.allForLanguage(lang);
     if (!commenters.isEmpty()) {
-      return commenters.get(0).getLineCommentPrefix();
+      String commentSep = commenters.get(0).getLineCommentPrefix();
+      return commentSep!=null?commentSep.strip():null;
     }
     return null;
   }
